@@ -57,7 +57,7 @@ router.post('/login', function (req, res, next) {
            }
 
            //Tạo web token cho nội dung đối tượng người dùng và trả về jwt
-           const token = jwt.sign(user, 'your_jwt_secret');
+           const token = jwt.sign(user, 'jwt_token');
            return res.json({user, token});
         });
     })(req, res);
