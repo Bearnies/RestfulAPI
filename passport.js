@@ -33,8 +33,8 @@ passport.use(new JWTStrategy({
             .then(user => {
                 return cb(null, user);
             })
-            .catch(err => {
-                return cb(err);
+            .catch(error => {
+                return cb(error);
             });
     }
 ));

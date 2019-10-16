@@ -1,7 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
 require('./passport');
-const auth = require('./routes/auth');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -10,6 +9,12 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+var user = require('./routes/users');
+const passport = require('passport');
+const auth = require('./routes/auth');
+app.use('/auth', auth);
+app.use('/users', passport.authenticate('jwt', {session: false}), user);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -39,9 +44,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
-app.use('/auth', auth);
-app.use('/users', passport.authenticate('jwt', {session: false}), user);
 
 module.exports = app;
