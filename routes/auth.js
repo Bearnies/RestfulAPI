@@ -19,7 +19,7 @@ createConnection.connect(function(error) {
 
 
 const addUser = async ({ name, password }) => {
-    return await User.create({ name, password });
+    return User.create({ name, password });
 };
 
 //POST register
